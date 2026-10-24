@@ -76,9 +76,9 @@ export default function Home() {
     <div className="flex flex-col flex-1 items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
       <main className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-white mb-2 tracking-tight">WAVELENGTH</h1>
+          <h1 className="text-5xl font-bold text-white mb-2 tracking-tight">SHROTALENGTH</h1>
           <p className="text-purple-200 text-lg">Find the sweet spot together</p>
-          <p className="text-purple-300 text-sm mt-2">Up to 10 players • Multiplayer</p>
+          <p className="text-purple-300 text-sm mt-2">Up to 10 players • Multiplayer • Darkly funny</p>
         </div>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-white/20">

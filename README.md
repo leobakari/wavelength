@@ -1,6 +1,6 @@
-# Wavelength - Multiplayer
+# Shrotalength - Multiplayer
 
-A fully functional multiplayer version of Wavelength built with Next.js 16, TypeScript, Tailwind CSS, and Pusher for real-time updates. Deployable on Vercel with up to 10 players per room.
+A fully functional multiplayer version of Shrotalength built with Next.js 16, TypeScript, Tailwind CSS, and Pusher for real-time updates. Deployable on Vercel with up to 10 players per room. Darkly humorous with twisted categories.
 
 ## Features
 

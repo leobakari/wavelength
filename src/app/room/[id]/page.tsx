@@ -130,7 +130,7 @@ function RoomPageContent() {
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h1 className="text-3xl font-bold text-white">WAVELENGTH</h1>
+            <h1 className="text-3xl font-bold text-white">SHROTALENGTH</h1>
             <p className="text-purple-200">
               Room: <span className="font-mono font-bold">{room.id}</span> • Round {room.round}/{room.maxRounds}
             </p>

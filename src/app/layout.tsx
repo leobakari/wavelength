@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Wavelength - Multiplayer Game",
-  description: "A multiplayer version of Wavelength where teams try to find the sweet spot",
+  title: "Shrotalength - Multiplayer Game",
+  description: "A multiplayer version of Shrotalength where teams try to find the sweet spot",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
