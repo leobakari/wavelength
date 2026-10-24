@@ -31,22 +31,51 @@ function RoomPageContent() {
   useEffect(() => {
     if (!roomId) return;
     const pusher = getPusherClient();
-    if (!pusher) return;
+    let channel: any = null;
+    if (pusher) {
+      try {
+        channel = pusher.subscribe(`room-${roomId}`);
+        channel.bind("game-update", (data: { room: RoomState }) => {
+          setRoom(data.room);
+        });
+        channel.bind("player-joined", (data: { room: RoomState }) => {
+          setRoom(data.room);
+        });
+        channel.bind("room-created", (data: { room: RoomState }) => {
+          setRoom(data.room);
+        });
+      } catch (e) {
+        // ignore
+      }
+    }
 
-    const channel = pusher.subscribe(`room-${roomId}`);
-    channel.bind("game-update", (data: { room: RoomState }) => {
-      setRoom(data.room);
-    });
-    channel.bind("player-joined", (data: { room: RoomState }) => {
-      setRoom(data.room);
-    });
-    channel.bind("room-created", (data: { room: RoomState }) => {
-      setRoom(data.room);
-    });
+    // Fallback polling for real-time sync
+    const interval = setInterval(() => {
+      fetch(`/api/room/${roomId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.room) {
+            setRoom((prev) => {
+              if (!prev) return data.room;
+              // Only update if something changed
+              if (JSON.stringify(prev) !== JSON.stringify(data.room)) {
+                return data.room;
+              }
+              return prev;
+            });
+          }
+        })
+        .catch(() => {});
+    }, 2000);
 
     return () => {
-      channel.unbind_all();
-      pusher.unsubscribe(`room-${roomId}`);
+      if (channel && pusher) {
+        try {
+          channel.unbind_all();
+          pusher.unsubscribe(`room-${roomId}`);
+        } catch (e) {}
+      }
+      clearInterval(interval);
     };
   }, [roomId]);
 
