@@ -18,28 +18,28 @@ export async function POST(request: NextRequest) {
 
     switch (action) {
       case "start":
-        room = roomStore.startGame(roomIdUpper, playerId);
+        room = await roomStore.startGame(roomIdUpper, playerId);
         break;
       case "giveClue":
         if (!clue) {
           return NextResponse.json({ error: "Clue is required" }, { status: 400 });
         }
-        room = roomStore.giveClue(roomIdUpper, playerId, clue);
+        room = await roomStore.giveClue(roomIdUpper, playerId, clue);
         break;
       case "makeGuess":
         if (guessPosition === undefined || guessPosition === null) {
           return NextResponse.json({ error: "Guess position is required" }, { status: 400 });
         }
-        room = roomStore.makeGuess(roomIdUpper, playerId, guessPosition);
+        room = await roomStore.makeGuess(roomIdUpper, playerId, guessPosition);
         break;
       case "reveal":
-        room = roomStore.reveal(roomIdUpper, playerId);
+        room = await roomStore.reveal(roomIdUpper, playerId);
         break;
       case "nextRound":
-        room = roomStore.nextRound(roomIdUpper, playerId);
+        room = await roomStore.nextRound(roomIdUpper, playerId);
         break;
       case "endGame":
-        room = roomStore.endGame(roomIdUpper, playerId);
+        room = await roomStore.endGame(roomIdUpper, playerId);
         break;
       default:
         return NextResponse.json({ error: "Invalid action" }, { status: 400 });

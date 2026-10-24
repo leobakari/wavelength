@@ -7,7 +7,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const room = roomStore.getRoom(id.toUpperCase());
+    const room = await roomStore.getRoom(id.toUpperCase());
     if (!room) {
       return NextResponse.json({ error: "Room not found" }, { status: 404 });
     }

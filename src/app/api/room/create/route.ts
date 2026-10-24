@@ -12,16 +12,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Name is required" }, { status: 400 });
     }
 
-    const room = roomStore.createRoom(name.trim(), maxRounds);
+    const room = await roomStore.createRoom(name.trim(), maxRounds);
     const pusher = getPusherServer();
 
-    // Notify channel (if using real Pusher keys) - create channel will be used by clients
     try {
       await pusher.trigger(`room-${room.id}`, "room-created", {
         room,
       });
     } catch (e) {
-      // Ignore pusher errors in dev without keys
+      // Ignore pusher errors
     }
 
     return NextResponse.json({

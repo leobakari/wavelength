@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Room ID and name are required" }, { status: 400 });
     }
 
-    const result = roomStore.joinRoom(roomId.toUpperCase(), name.trim());
+    const result = await roomStore.joinRoom(roomId.toUpperCase(), name.trim());
     if (!result) {
       return NextResponse.json({ error: "Room not found" }, { status: 404 });
     }
